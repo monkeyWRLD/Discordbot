@@ -5,8 +5,6 @@
 #include "commands/ping/ping.h"
 #include "commands/ban/ban.h"
 
-const std::string token = "MTE2MTM2NTM0MTY3NTQ1NDQ3NA.GbBZ0J.0M6tB2C7H6qfDNlBFaBK66yHzneQrByQzPz--Y";
-
 std::map<std::string, command_definition> commands = {
     { "ping", { "displays the ping of the bot", handle_ping }},
     { "randomcat", { "Sends a random cat picture", handle_randomcat }},
@@ -15,7 +13,12 @@ std::map<std::string, command_definition> commands = {
 
 int main()
 {
-    dpp::cluster bot(token);
+    std::ifstream stream("C:/Users/monkey/Documents/GitHub/Discordbot/Discordbot/config.json");
+    json configfile = json::parse(stream);
+   
+    dpp::cluster bot(configfile["token"]);
+
+
 
     bot.on_log(dpp::utility::cout_logger());
 
