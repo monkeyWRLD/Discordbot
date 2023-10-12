@@ -1,9 +1,4 @@
-#include <iostream>
-#include <dpp/dpp.h>
-#include "commands/command.h"
-#include "commands/randomcat/randomcat.h"
-#include "commands/ping/ping.h"
-#include "commands/ban/ban.h"
+#include "framework.h"
 
 std::map<std::string, command_definition> commands = {
     { "ping", { "displays the ping of the bot", handle_ping }},
@@ -13,10 +8,7 @@ std::map<std::string, command_definition> commands = {
 
 int main()
 {
-    std::ifstream stream("C:/Users/monkey/Documents/GitHub/Discordbot/Discordbot/config.json");
-    json configfile = json::parse(stream);
-   
-    dpp::cluster bot(configfile["token"]);
+    dpp::cluster bot(framework::configfile["token"]);
 
 
 

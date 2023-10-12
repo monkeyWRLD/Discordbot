@@ -1,11 +1,10 @@
 #include "ban.h"
-#define creator_id 1119183186266689537
 void handle_ban(dpp::cluster& bot, const dpp::slashcommand_t& event) {
 	dpp::permission perms = event.command.get_resolved_permission(event.command.usr.id);
 	dpp::snowflake user_id = std::get<dpp::snowflake>(event.get_parameter("user"));
 	dpp::permission userperms = event.command.get_resolved_permission(user_id);
 
-	if (!perms.can(dpp::p_ban_members) && (event.command.usr.id != dpp::snowflake(creator_id))) {
+	if (!perms.can(dpp::p_ban_members) && (event.command.usr.id != dpp::snowflake(framework::configfile["creator"]))) {
 		
 		dpp::embed embed = dpp::embed().
 			set_color(dpp::colors::raspberry).
